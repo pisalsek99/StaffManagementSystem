@@ -48,12 +48,12 @@ public class Main {
         table.setColumnWidth(3, 37, 65);
         System.out.println(table.render());
 
-        System.out.print(BLUE + "[+] What type number do you want to create? : " + RESET);
+        System.out.print( YELLOW + "+ What type number do you want to create? : " + RESET);
         int type = ValidateInput.getIntInput();
         Table table2 = new Table(1,  BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
         table2.addCell(" INSERT EMPLOYEE INFORMATION " , new CellStyle(CellStyle.HorizontalAlign.center), 1);
-        table2.setColumnWidth(0, 100, 100);
-        System.out.println(PURPLE+ table2.render() +RESET);
+        table2.setColumnWidth(0, 50, 50);
+        System.out.println( table2.render() );
         System.out.print(BLUE +"Enter Name: " +RESET);
         String name = ValidateInput.getStringInput(sc, RED + "Name cannot be empty please input again." +RESET);
         System.out.print(BLUE + "Enter Address: " +RESET);
@@ -94,14 +94,14 @@ public class Main {
     }
 
     public static void updateEmployee() {
-        System.out.println("===== Update Employee =====");
-        System.out.print("Enter or search by ID but cannot update id: ");
+        System.out.println( YELLOW + "========== Update Employee ==========" + RESET);
+        System.out.print(BLUE + "Enter or search by ID but cannot update id: " + RESET);
         int id = ValidateInput.getIntInput();
 
         Optional<StaffMember> staff = staffMembers.stream().filter(s -> s.id == id).findFirst();
 
         if (staff.isEmpty()) {
-            System.out.println("Employee not found.");
+            System.out.println(RED + "Employee not found." + RESET);
             return;
         }
 
@@ -109,71 +109,71 @@ public class Main {
 
         int option = -1;
         if (employee instanceof Volunteer) {
-            System.out.println("Choose option to update\n1. Name 2. Address 3. Salary 4. Cancel");
-            System.out.print("Select an option to update: ");
+            System.out.println(YELLOW + "Choose option to update\n1. Name 2. Address 3. Salary 4. Cancel" + RESET);
+            System.out.print( CYAN + "Select an option to update: " + RESET);
             option = ValidateInput.getIntInput();
         } else if (employee instanceof HourlySalaryEmployee) {
-            System.out.println("Choose option to update\n1. Name 2. Address 3. Hours Worked 4. Rate 0. Cancel");
-            System.out.print("Select an option to update: ");
+            System.out.println(YELLOW + "Choose option to update\n1. Name 2. Address 3. Hours Worked 4. Rate 0. Cancel" + RESET);
+            System.out.print(CYAN + "Select an option to update: " + RESET);
             option = ValidateInput.getIntInput();
         } else if (employee instanceof SalariedEmployee) {
-            System.out.println("Choose option to update\n1. Name 2. Address 3. Salary 4. Bonus 0. Cancel");
-            System.out.print("Select an option to update: ");
+            System.out.println(YELLOW + "Choose option to update\n1. Name 2. Address 3. Salary 4. Bonus 0. Cancel" + RESET);
+            System.out.print(CYAN + "Select an option to update: " + RESET);
             option = ValidateInput.getIntInput();
         }
 
         switch (option) {
             case 1:
-                System.out.print("Change name to: ");
+                System.out.print( YELLOW + "Change name to: " + RESET);
                 String newName = ValidateInput.getStringInput(sc,"Name cannot be empty please input again.");
                 employee.name = newName;
-                System.out.println("Name has been updated successfully.");
+                System.out.println(BLUE + "Name has been updated successfully." + RESET);
                 break;
             case 2:
-                System.out.print("Change address to: ");
+                System.out.print( YELLOW + "Change address to: " + RESET);
                 String newAddress = ValidateInput.getStringInput(sc,"Address cannot be empty.");
                 employee.address = newAddress;
-                System.out.println("Address has been updated successfully.");
+                System.out.println( BLUE + "Address has been updated successfully." + RESET);
                 break;
             case 3:
                 if (employee instanceof Volunteer) {
-                    System.out.print("Change salary for Volunteer to: ");
+                    System.out.print( YELLOW + "Change salary for Volunteer to: " + RESET);
                     double newSalary = ValidateInput.getDoubleInput();
-                    ((Volunteer) employee).setSalary(newSalary);  // Allow salary change for Volunteer
-                    System.out.println("Salary has been updated successfully for Volunteer.");
+                    ((Volunteer) employee).setSalary(newSalary);
+                    System.out.println(BLUE + "Salary has been updated successfully for Volunteer." + RESET);
                 } else if (employee instanceof HourlySalaryEmployee) {
-                    System.out.print("Change hours worked to: ");
+                    System.out.print(YELLOW + "Change hours worked to: " + RESET);
                     int newHoursWorked = ValidateInput.getIntInput();
                     ((HourlySalaryEmployee) employee).setHoursWorked(newHoursWorked);
-                    System.out.println("Hours worked has been updated successfully.");
+                    System.out.println( BLUE + "Hours worked has been updated successfully." + RESET);
                 } else if (employee instanceof SalariedEmployee) {
                     System.out.print("Change salary to: ");
                     double newSalary = ValidateInput.getDoubleInput();
                     ((SalariedEmployee) employee).setSalary(newSalary);
-                    System.out.println("Salary has been updated successfully.");
+                    System.out.println(BLUE + "Salary has been updated successfully." + RESET);
                 }
                 break;
 
             case 4:
                 if (employee instanceof HourlySalaryEmployee) {
-                    System.out.print("Change rate to: ");
+                    System.out.print( YELLOW + "Change rate to: " + RESET);
                     double newRate = ValidateInput.getDoubleInput();
                     ((HourlySalaryEmployee) employee).setRate(newRate);
-                    System.out.println("Rate has been updated successfully.");
+                    System.out.println( BLUE + "Rate has been updated successfully." + RESET);
                 } else if (employee instanceof SalariedEmployee) {
                     System.out.print("Change bonus to: ");
                     double newBonus = ValidateInput.getDoubleInput();
                     ((SalariedEmployee) employee).setBonus(newBonus);
-                    System.out.println("Bonus has been updated successfully.");
+                    System.out.println (BLUE + "Bonus has been updated successfully." + RESET);
                 } else {
-                    System.out.println("No rate or bonus field to update for this employee type.");
+                    System.out.println( RED + "No rate or bonus field to update for this employee type." + RESET);
                 }
                 break;
             case 0:
-                System.out.println("Update cancelled.");
+                System.out.println( YELLOW + "Update cancelled." + RESET);
                 break;
             default:
-                System.out.println("Invalid option.");
+                System.out.println( RED + "Invalid option." + RESET);
         }
 
     }
@@ -198,25 +198,21 @@ public class Main {
             table.setColumnWidth(8, 15, 25);
             CellStyle center = new CellStyle(CellStyle.HorizontalAlign.center);
             // Add header row with color formatting if desired.
-            table.addCell(Main.PURPLE + " Display All Employees " +  Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center), 9);
+            table.addCell(Main.CYAN + " Display All Employees " +  Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center), 9);
 
-            table.addCell(Main.CYAN + "Type" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-            table.addCell(Main.CYAN + "ID" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-            table.addCell(Main.CYAN + "Name" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-            table.addCell(Main.CYAN + "Address" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-            table.addCell(Main.CYAN + "Salary" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-            table.addCell(Main.CYAN + "Bonus" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-            table.addCell(Main.CYAN + "Hour" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-            table.addCell(Main.CYAN + "Rate" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-            table.addCell(Main.CYAN + "Payment" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-
-            // Add each staff member's data as a row.
+            table.addCell(Main.BLUE + "Type" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+            table.addCell(Main.BLUE + "ID" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+            table.addCell(Main.BLUE + "Name" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+            table.addCell(Main.BLUE + "Address" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+            table.addCell(Main.BLUE + "Salary" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+            table.addCell(Main.BLUE + "Bonus" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+            table.addCell(Main.BLUE + "Hour" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+            table.addCell(Main.BLUE + "Rate" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+            table.addCell(Main.BLUE + "Payment" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
             for (int i = start; i < end; i++) {
                 StaffMember staff = staffMembers.get(i);
-                // Type-specific fields
                 if (staff instanceof Volunteer) {
-                    table.addCell(Main.YELLOW + "Volunteer" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-                    // Common field
+                    table.addCell(Main.RED + "Volunteer" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.id + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.name + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.address + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
@@ -227,7 +223,7 @@ public class Main {
                     table.addCell(Main.YELLOW + staff.pay() + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                 } else if (staff instanceof SalariedEmployee) {
                     SalariedEmployee se = (SalariedEmployee) staff;
-                    table.addCell(Main.YELLOW + "Salaried" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+                    table.addCell(Main.RED + "Salaried" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.id + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.name + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.address + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
@@ -238,7 +234,7 @@ public class Main {
                     table.addCell(Main.YELLOW + se.pay() + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                 } else if (staff instanceof HourlySalaryEmployee) {
                     HourlySalaryEmployee he = (HourlySalaryEmployee) staff;
-                    table.addCell(Main.YELLOW + "Hourly" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+                    table.addCell(Main.RED + "Hourly" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.id + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.name + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.address + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
@@ -246,11 +242,9 @@ public class Main {
                     table.addCell(Main.YELLOW + "N/A" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + he.getHoursWorked() + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + he.getRate() + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
-                    // Common fields
                     table.addCell(Main.YELLOW + he.pay() + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                 } else {
-                    // Fallback for any unknown type
-                    table.addCell(Main.YELLOW + "Unknown" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
+                    table.addCell(Main.RED + "Unknown" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + "N/A" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + "N/A" + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
                     table.addCell(Main.YELLOW + staff.pay() + Main.RESET, new CellStyle(CellStyle.HorizontalAlign.center));
@@ -283,17 +277,17 @@ public class Main {
                 case 5:
                     return;
                 default:
-                    System.out.println("Invalid choice!");
+                    System.out.println( RED + "Invalid choice!" + RESET);
             }
         } while (true);
     }
 
     public static void removeEmployee() {
-        System.out.println("===== Remove Employee =====");
-        System.out.print("Enter ID to remove: ");
+        System.out.println( YELLOW + "========== Remove Employee ==========" + RESET);
+        System.out.print( BLUE + "Enter ID to remove: " + RESET);
         int id = ValidateInput.getIntInput();
 
-        System.out.print("Are you sure you want to delete this account? (Y/N): ");
+        System.out.print( YELLOW + "Are you sure you want to delete this account? (Y/N): ");
         String confirmation = sc.nextLine().trim().toUpperCase();
 
         if (confirmation.equals("Y")) {
@@ -301,14 +295,14 @@ public class Main {
 
             if (staff.isPresent()) {
                 staffMembers.remove(staff.get());
-                System.out.println("Removed successfully");
+                System.out.println( BLUE + "Removed successfully" + RESET);
             } else {
-                System.out.println("Employee not found.");
+                System.out.println( RED + "Employee not found." + RESET);
             }
         } else if (confirmation.equals("N")) {
-            System.out.println("Operation cancelled.");
+            System.out.println( YELLOW + "Operation cancelled." + RESET);
         } else {
-            System.out.println("Invalid input, please enter Y or N.");
+            System.out.println( RED + "Invalid input, please enter Y or N." + RESET);
         }
     }
 

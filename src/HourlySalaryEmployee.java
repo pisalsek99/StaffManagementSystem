@@ -1,8 +1,3 @@
-import org.nocrala.tools.texttablefmt.BorderStyle;
-import org.nocrala.tools.texttablefmt.CellStyle;
-import org.nocrala.tools.texttablefmt.ShownBorders;
-import org.nocrala.tools.texttablefmt.Table;
-
 public class HourlySalaryEmployee extends StaffMember {
     private int hoursWorked;
     private double rate;
