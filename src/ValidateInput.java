@@ -4,7 +4,7 @@ public class ValidateInput {
     public static int getIntInput() {
         while (true) {
             try {
-                return Integer.parseInt(StaffManagementSystem.sc.nextLine());
+                return Integer.parseInt(Main.sc.nextLine());
             } catch (NumberFormatException e) {
                 System.out.print("Invalid input. Please enter a valid integer: ");
             }
@@ -14,7 +14,7 @@ public class ValidateInput {
     public static double getDoubleInput() {
         while (true) {
             try {
-                return Double.parseDouble(StaffManagementSystem.sc.nextLine());
+                return Double.parseDouble(Main.sc.nextLine());
             } catch (NumberFormatException e) {
                 System.out.print("Invalid input. Please enter a valid double: ");
             }
